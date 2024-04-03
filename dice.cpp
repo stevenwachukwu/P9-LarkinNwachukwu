@@ -63,38 +63,37 @@ const int* CantStopDice::newRoll() {
     ///////////////////////////////////////////
 
     ///////////
-    FakeDice::FakeDice() : CantStopDice() {
-
-    }
-
-    FakeDice::FakeDice(const std::string& filename) : CantStopDice() {
-        inputFile.open(filename);
-        if (!inputFile.is_open()) {
-            cerr << "Error: Could not open file " << filename << std::endl;
-            fatal(); // call fatal
-        }
-    }
-
-    FakeDice::~FakeDice() {
-        if (inputFile.is_open()) {
-            inputFile.close();
-        }
-    }
-
-    void FakeDice::roll() {
-        if (!inputFile.is_open()) {
-            cerr << "Error: Input file is not open" << std::endl;
-            fatal(); // Terminate the program if file is not open
-        }
-
-        for (int i = 0; i < 4; ++i) {
-            inputFile >> diceValues[i]; // Read four dice
-        }
-
-        // pairing values
-        pairValues[0] = diceValues[0] + diceValues[1];
-        pairValues[1] = diceValues[2] + diceValues[3];
-    }
     
-    return dicePair;
-} //this function is utilized to override dices roll function
+   FakeDice::FakeDice() : CantStopDice(),inputfile(FakeDice.txt){}
+   FakeDice::~FakeDice(){
+       inputfile.close;
+    }
+
+    void FakeDice::roll() { // The roll used for fake dice
+        if (!FakeDice.txt.is_open()) {
+            cerr << "Error: Input file is not open" << endl;
+            fatal(); // Terminate the program if file is not open
+        } else {
+            for (int i = 0; i < 4; ++i) {
+                inputFile >> diceValues[i]; // the 4 dice sample rolls
+            }
+            Pair[0] = dicepair[0] + diceArray[1];
+            Pair[1] = dicepair[2] + diceArray[3];
+        }
+
+        FakeDice.txt >> string;
+        if (code == "STOP") {
+            // End the turn and go to the next player
+        } else if (code == "ROLL") {
+            // Continue the turn
+        } else {
+            if (FakeDice.txt.eof) {
+                fatal();
+                // if the game doesn't finish in the given time fatal is called
+            }
+        }
+    }
+}
+/////////////
+    return pairValues;
+}
