@@ -64,36 +64,25 @@ const int* CantStopDice::newRoll() {
 
     ///////////
     
-   FakeDice::FakeDice() : CantStopDice(),inputfile(FakeDice.txt){}
-   FakeDice::~FakeDice(){
-       inputfile.close;
+    FakeDice::FakeDice() : CantStopDice(){
+       inputFile.open("FakeDice,txt");
+       if (!inputFile.is_open()){
+           cerr << "Error: Failed to open FakeDice "  << endl;
+           fatal();
+       }
     }
-
-    void FakeDice::roll() { // The roll used for fake dice
-        if (!FakeDice.txt.is_open()) {
-            cerr << "Error: Input file is not open" << endl;
-            fatal(); // Terminate the program if file is not open
-        } else {
-            for (int i = 0; i < 4; ++i) {
-                inputFile >> diceValues[i]; // the 4 dice sample rolls
-            }
-            Pair[0] = dicepair[0] + diceArray[1];
-            Pair[1] = dicepair[2] + diceArray[3];
-        }
-
-        FakeDice.txt >> string;
-        if (code == "STOP") {
-            // End the turn and go to the next player
-        } else if (code == "ROLL") {
-            // Continue the turn
-        } else {
-            if (FakeDice.txt.eof) {
-                fatal();
-                // if the game doesn't finish in the given time fatal is called
-            }
-        }
-    }
+FakeDice::~FakeDice() {
+    inputFile.close();
 }
 /////////////
-    return pairValues;
+const int* FakeDice:: roll() {
+    int* Pair = new int[2];
+    for (int i = 0; i < 4; ++i) {
+        inputFile >> diceVal[i];
+    }
+
+    Pair[0] = diceVal[0] + diceVal[1];
+    Pair[1] = diceVal[2] + diceVal[3];
+
+    return Pair;
 }
