@@ -1,7 +1,7 @@
 /*Written by Steve Nwachukwu and Nick Larkin*/
 #ifndef dice
 #define dice
-//#FakeDice
+#include "FakeDice.txt"
 
 #include "tools.hpp"
 
