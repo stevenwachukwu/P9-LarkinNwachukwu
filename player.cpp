@@ -8,7 +8,10 @@ ostream& Player::print(ostream& playerOutput) {
     playerOutput << "\nPlayer Name: " << playerName << endl;
     playerOutput << "Player's color: " << colorStrings[(int)colorVal] << endl;
     playerOutput << "Player's score: " << score << endl;
-    playerOutput << "The scoreboard: " << scoreboard[0,1,2] << endl;
+    playerOutput << "The scoreboard: ";
+    for (int k = 0; k < score; k++) {
+        playerOutput << scoreboard[k] << " ";
+    }
     return playerOutput;
 } //the print function to output the player's information
 
@@ -23,7 +26,7 @@ int Player::getScore() {
 bool Player::wonColumn(int colNum) {
     scoreboard[score] = colNum;
     score++;
-    if (colNum >= 3) {
+    if (score >= 3) {
         cout << "You won!" << endl;
         return true;
     }
