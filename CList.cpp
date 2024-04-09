@@ -1,12 +1,7 @@
 //Written by Steve Nwachukwu and Nick Larkin
 #include "CList.hpp"
 
-CList::CList() {
-    cellCount = 0;
-    head = nullptr;
-    tail = nullptr;
-    currentCell = nullptr;
-} //constructor for CList
+CList::CList() : cellCount(0), head(nullptr), tail(nullptr), currentCell(nullptr) {} //constructor for CList
 
 CList::~CList() {
     currentCell = head;
@@ -19,28 +14,26 @@ CList::~CList() {
 }; //destructor for CList
 
 bool CList::empty() {
-    if (cellCount == 0) {
-        return true;
-    }
-    else {
-        return false;
-    }
+return cellCount == 0;
 }
 
-ostream& CList::print(ostream& CListOutput) {
-    Cell* temp = head;
-    for (int i = 0; i < cellCount; i++) {
-        currentCell = temp;
-        temp = temp -> next;
-        currentCell->wrapper.print(CListOutput);
+ostream& CList::print(ostream& CO) {
+    currentCell = head;
+    if (cellCount == 0) {
+        return CO;
     }
-    return CListOutput;
-}
+    for (int i = 0; i < cellCount; i++) {
+        currentCell->wrapper->print(CO);
+        currentCell = currentCell -> next;
+    }
+    return CO;
+} //CO is the shortened identifier of the output
 
 void CList::addCell(Cell *it) {
 if (head == nullptr && tail == nullptr) {
     head = it;
     tail = it;
+    currentCell = head;
     cellCount++;
     return;
 }
@@ -63,29 +56,27 @@ Cell* CList::next() {
 }
 
 void CList::remove() {
-    Cell* cellStorage = head;
-    if (head == nullptr && tail == nullptr) {
+    if (currentCell == nullptr) {
         return;
     }
-    for (int i = 0; i < cellCount; i++) {
-        if (cellStorage -> next == currentCell) {
-            cellStorage -> next = currentCell -> next;
-            //currentCell -> wrapper.print(cout);
-            delete currentCell;
-            currentCell = cellStorage;
-            break;
-        }
-      cellStorage = cellStorage -> next;
+    if (head == tail) {
+        delete currentCell;
+        head = tail = currentCell = nullptr;
+        cellCount = 0;
+        return;
     }
-    if (head == nullptr) {
-        head = tail -> next;
+    Cell* prevCell = head;
+    while (prevCell->next != currentCell) {
+        prevCell = prevCell->next;
     }
-    if (tail == nullptr) {
-        tail = cellStorage;
+    prevCell->next = currentCell->next;
+    if (currentCell == head) {
+        head = head->next; // the head updates whenever the removed cell was the head
     }
+    if (currentCell == tail) {
+        tail = prevCell; // the tail updates whenever the removed cell was the tail
+    }
+    delete currentCell;
+    currentCell = prevCell;
     cellCount--;
 }
-
-upp::upp(string userName,ECcolor Tilecolor) {
-    playerName = Player(userName, Tilecolor);
-} //the 
