@@ -1,15 +1,16 @@
 /*Written by Steve Nwachukwu and Nick Larkin*/
 #ifndef dice
 #define dice
-#include "FakeDice.txt"
+
 
 #include "tools.hpp"
 
 class Dice {
 private:
     int nDice;
-    int* diceVal;
 
+protected:
+    int* diceVal;
 public:
     Dice(int n);
     virtual ~Dice();
@@ -22,7 +23,7 @@ private:
     int dicePair [2];
 public:
     CantStopDice();
-    virtual const int* newRoll();
+    virtual const int* roll();
 };
 
 class FakeDice:public CantStopDice {
@@ -31,7 +32,6 @@ private:
 
 public:
     FakeDice();
-    roll();
     virtual ~FakeDice() override;
     virtual const int *roll() override;
 };
