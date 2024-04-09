@@ -30,17 +30,17 @@ ostream& Dice::print(ostream& diceOutput) {
 
 CantStopDice::CantStopDice():Dice(4) {}
 
-const int* CantStopDice::newRoll() {
+const int* CantStopDice::roll() {
     int combinedPair;
     Dice::roll();
     cout << "Please select the most important name and dice pair for this game:\n";
-    const int* diceArray = Dice::roll();
+    const int *diceArray = Dice::roll();
     cout << "Output A: " << diceArray[0];
     cout << "\nOutput B: " << diceArray[1];
     cout << "\nOutput C: " << diceArray[2];
     cout << "\nOutput D: " << diceArray[3];
     cin >> combinedPair;
-    while(true) {
+    while (true) {
         if (combinedPair == 1 || combinedPair == 2) {
             cout << "Selected input works!" << endl;
             break;
@@ -51,38 +51,29 @@ const int* CantStopDice::newRoll() {
     }
     if (combinedPair == 1) {
         dicePair[0] = diceArray[0] + diceArray[1];
-        dicePair[1] = diceArray[2] + diceArray [3];
-    }
-    else if (combinedPair == 2) {
-        dicePair[0] = diceArray[2] + diceArray [3];
+        dicePair[1] = diceArray[2] + diceArray[3];
+    } else if (combinedPair == 2) {
+        dicePair[0] = diceArray[2] + diceArray[3];
         dicePair[1] = diceArray[0] + diceArray[1];
-    }
-    else {
+    } else {
         cout << "Sorry but your input was not validated!" << endl;
     }
-    ///////////////////////////////////////////
+    return dicePair;
+}
 
-    ///////////
-    
-    FakeDice::FakeDice() : CantStopDice(){
-       inputFile.open("FakeDice,txt");
-       if (!inputFile.is_open()){
-           cerr << "Error: Failed to open FakeDice "  << endl;
-           fatal();
-       }
+FakeDice::FakeDice() : CantStopDice(){
+    inputFile.open("FakeDice.txt");
+    if (!inputFile.is_open()){
+        fatal("Error: Failed to open FakeDice");
     }
+}
 FakeDice::~FakeDice() {
     inputFile.close();
 }
-/////////////
-const int* FakeDice:: roll() {
-    int* Pair = new int[2];
+
+const int* FakeDice::roll() {
     for (int i = 0; i < 4; ++i) {
         inputFile >> diceVal[i];
     }
-
-    Pair[0] = diceVal[0] + diceVal[1];
-    Pair[1] = diceVal[2] + diceVal[3];
-
-    return Pair;
+    return diceVal;
 }
