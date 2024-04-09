@@ -1,21 +1,13 @@
 //Written by Steve Nwachukwu and Nick Larkin
 #include "tools.hpp"
 #include "player.hpp"
-
-class upp {
-    Player playerName;
-public:upp (string userName, ECcolor Tilecolor);
-  ostream& print(ostream& userName) {
-        userName << playerName;
-        return userName;
-    }
-}; //wrapper class for upp
+using upp = unique_ptr<Player>;
 
 class Cell {
 private:
     upp wrapper;
     Cell* next;
-public:Cell (upp wrapper):wrapper(wrapper) {next = nullptr;};
+public:Cell (upp wrapper):wrapper(move (wrapper)) ,next (nullptr){}
     friend class CList;
     ~Cell() = default;
 };
