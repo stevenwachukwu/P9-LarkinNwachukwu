@@ -9,7 +9,7 @@ private:
     string playerName;
     ECcolor colorVal;
     int score = 0;
-    int scoreboard [3] = {1,2,3};
+    int scoreboard [3];
 
 
 public:
