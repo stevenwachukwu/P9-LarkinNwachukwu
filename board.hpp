@@ -6,7 +6,7 @@
 class Board {
 private:
     int towerCounter = 0;
-    int towerDetector[3];
+    int towerList[3];
     Column* backBone [13];
     Player* currentPlayer;
 
