@@ -74,8 +74,8 @@ void Game::oneTurn(Player* pp) {
     int gameOptions;
     cout << "\nPlease pick one of the following options: " << endl;
     cout << "1. Roll    2. Stop    3. Resign" << endl;
-    cin >> gameOptions; //comment this out whenever you want option 1 or 2
-    inputFile2 >> gameOptions; //comment this out whenever you want option 3
+    cin >> gameOptions; //comment this out whenever you want option 1 or 2 (default setting)
+    //inputFile2 >> gameOptions; //comment this out whenever you want option 3
     if (gameOptions == 1) {
      Gameroll();
     }
