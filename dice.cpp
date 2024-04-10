@@ -33,7 +33,7 @@ CantStopDice::CantStopDice():Dice(4) {}
 const int* CantStopDice::roll() {
     int combinedPair;
     Dice::roll();
-    cout << "Please select the most important name and dice pair for this game:\n";
+    cout << "Please select the most important dice pair for this game (select 1 or 2):\n";
     const int *diceArray = Dice::roll();
     cout << "Output A: " << diceArray[0];
     cout << "\nOutput B: " << diceArray[1];
@@ -58,7 +58,7 @@ const int* CantStopDice::roll() {
     } else {
         cout << "Sorry but your input was not validated!" << endl;
     }
-    return dicePair;
+    return diceArray;
 }
 
 FakeDice::FakeDice() : CantStopDice(){
